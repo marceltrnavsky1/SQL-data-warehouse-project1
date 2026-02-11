@@ -2,16 +2,18 @@
 Building a modern data warehouse with SQL Server, including ETL processes. data modeling and analytics.
 
 ## Acknowledgements
+
 This project was created based on a tutorial by DataWithBaraa.
 Special thanks for sharing valuable knowledge for free.
 Tutorial link: https://youtu.be/SSKVgrwhzus?si=a9yrJDsT8LbA53aK
-
+---
 Welcome to the Data Warehouse and Analytics Project repository! 🚀
 
 This project demonstrates a comprehensive data warehousing and analytics solution, from building a data warehouse to generating actionable insights. Designed as a portfolio project, it highlights industry best practices in data engineering and analytics.
 
 ---
 ### 🏗️ Data Architecture
+
 The data architecture for this project follows Medallion Architecture Bronze, Silver, and Gold layers:
 ![model](docs/DataArchitecture.png)
 - **Bronze Layer:** Stores raw data as-is from the source systems. Data is ingested from CSV Files into SQL Server Database.
@@ -19,6 +21,7 @@ The data architecture for this project follows Medallion Architecture Bronze, Si
 - **Gold Layer:** Houses business-ready data modeled into a star schema required for reporting and analytics.
 ---
 ### 📖 Project Overview
+
 This project involves:
 
 - **Data Architecture:** Designing a Modern Data Warehouse Using Medallion Architecture Bronze, Silver, and Gold layers.
@@ -27,6 +30,7 @@ This project involves:
 - **Analytics & Reporting:** Creating SQL-based reports and dashboards for actionable insights.
 ---
 ### 🛠️ Important Links & Tools:
+
 Everything is for Free!
 
 - **Datasets:** Access to the project dataset (csv files).
@@ -38,6 +42,7 @@ Everything is for Free!
 - **Notion Project Steps:** Access to All Project Phases and Tasks.
 ---
 ### 🚀 Project Requirements
+
 Building the Data Warehouse (Data Engineering)
 
 **Objective**
@@ -52,6 +57,7 @@ Specifications
 - **Documentation:** Provide clear documentation of the data model to support both business stakeholders and analytics teams.
 ---  
 ### BI: Analytics & Reporting (Data Analysis)
+
 Objective
 Develop SQL-based analytics to deliver detailed insights into:
 
@@ -62,6 +68,7 @@ Develop SQL-based analytics to deliver detailed insights into:
 These insights empower stakeholders with key business metrics, enabling strategic decision-making.
 ---
 ### 🛡️ License
+
 This project is licensed under the MIT License. You are free to use, modify, and share this project with proper attribution.
 ---
 ### 🌟 About Me
