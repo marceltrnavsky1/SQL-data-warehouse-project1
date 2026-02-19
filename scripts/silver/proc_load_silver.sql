@@ -48,3 +48,37 @@ ROW_NUMBER () OVER (PARTITION BY cst_id ORDER BY cst_create_date DESC) as flag_l
 FROM bronze.crm_cust_info
 WHERE cst_id IS NOT NULL
 )t WHERE flag_last = 1; -- Select the most recent record per customer
+
+
+;
+
+
+INSERT INTO silver.crm_prd_info (
+prd_id,
+cat_id,
+prd_key,
+prd_nm,
+prd_cost,
+prd_line,
+prd_start_dt,
+prd_end_dt
+)
+SELECT
+	prd_id,
+	REPLACE(SUBSTRING(prd_key, 1, 5), '-', '_') AS cat_id, /* -> Extract a specific part of a string value, first 5 characters 
+																-> aby sme mali rovnaký cat_id ako je v bronze.erp_px_cat_g1v2 tak treba REPLACE '-' ZA '_' (CO-RF vs CO_RF)*/
+	SUBSTRING(prd_key, 7, LEN(prd_key)) AS prd_key,        /* -> tento prd_key potrebujeme na spojenie s sls_prd_key (bronze.crm_sales_datails) */
+	prd_nm,
+	ISNULL (prd_cost, 0) AS prd_cost,        /* Všetky Null budú číslo 0 */
+	CASE WHEN UPPER(TRIM(prd_line)) = 'M' THEN  'Mountain'
+		 WHEN UPPER(TRIM(prd_line)) = 'R' THEN  'Road'
+	     WHEN UPPER(TRIM(prd_line)) = 'S' THEN  'Other Sales'
+	     WHEN UPPER(TRIM(prd_line)) = 'T' THEN  'Touring'
+		 ELSE 'n/a'
+	END AS prd_line, -- Map product line codes to descriptive values
+	CAST (prd_start_dt AS DATE) AS prd_start_dt,
+	CAST (
+		LEAD (prd_start_dt) OVER (PARTITION BY prd_key ORDER BY prd_start_dt)-1 
+		AS DATE
+	) AS prd_end_dt -- Calculate end date as one day before the next start date
+	FROM bronze.crm_prd_info
